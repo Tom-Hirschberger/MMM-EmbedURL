@@ -148,6 +148,8 @@ The following happens in this example:
   * Adds two dummy elements
   * All elements get the css classes "dummy3" and "myDummy" added
 
+If you think about the dummy URLs look a little bit like URLs of Grafana panels you are right. I use the module to show my Grafana charts. Examples of howto setup InfluxDB and Grafana are included in the [doc](doc) directory!
+
 ## Styling
 
 The module uses flexbox layout and all styling is done via css. Even the size of the embeded elements is controlled via css.
