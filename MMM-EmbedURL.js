@@ -166,6 +166,13 @@ Module.register('MMM-EmbedURL', {
 	getWrapperElement: function(subConfig, fallbackPositions, depth=0){
 		if (subConfig != null){
 			const self = this
+
+			if ((subConfig["profiles"] || null) != null) {
+				if (!subConfig["profiles"].includes(self.currentProfile)) {
+					return null
+				}
+			}
+
 			let classes = []
 			let subClasses = subConfig["classes"] || null
 
