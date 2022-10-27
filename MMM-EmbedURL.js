@@ -158,10 +158,10 @@ Module.register('MMM-EmbedURL', {
 				console.log(JSON.stringify(attributes))
 				for(let curAttribute of attributes){
 					let attArray = curAttribute.split("=")
-					let key = attArray[0].replaceAll(" ")
+					let key = attArray[0]
 					let value = attArray[1] || ""
 
-					embedElement.setAttribute(key, value)
+					embedElement.setAttribute(key.trim(), value.trim())
 				}
 			}
 			embedElement.classList.add("embeded")
