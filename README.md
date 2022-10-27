@@ -35,9 +35,132 @@ Add the following code to your ~/MagicMirror/config/config.js:
   header: "Embed-URL",
   config: {
     updateInterval: 120,
+    attributes: [
+        "frameborder=0",
+    ],
     embed: [
         "https://magicmirror.builders/",
         "https://www.youtube.com/embed/dIHr96KqfDI"
     ]
   },
+},
+```
+
+In this a very basic example with the following result:
+
+* The module will be included at the "top_center" position
+* The header text of the module is "Embed-URL"
+* All embeded pages will be refreshed every 120 seconds
+* All embeded pages will get the attribute "frameborder=0" set
+* Two pages will be embedded
+
+## General options
+
+| Option  | Description | Type | Default |
+| ------- | --- | --- | --- |
+| updateInterval | The websites will be refreshed in this interval provided in seconds. | Integer | 60 |
+| animationSpeed | The creation of the elements will be animated with this speed in milliseconds. | Integer | 500 |
+| embedElementType | The websites will be embeded with this html element. | String | "iframe" |
+| basicElementType | The wrappers use this type of html element. | String | "span" |
+| positions | The elements will be added in the order of the characters in this string (i=icon, t=title, e=embeded). | String | "tie" |
+| attributes | This is a array with additional attributes that should be added to the embeded html element. | Array of Strings | \[<br>"frameborder=0"<br>\] |
+| title | Either a single String or a Array of String that will be added as title. It is supported to add html tags to the title! | String | null |
+| fontIcon | A single String or a Array of String containing the [fontawesome 4.7](https://fontawesome.com/v4/icons/) class definition of icons (i.e. "fa fa-tint"). | Array or single String | null |
+| imgIcon | If you want to use a image as icon instead of [fontawesome 4.7](https://fontawesome.com/v4/icons/) icons you can specify a single URL or a Array of URLs with this option. **If both fontIcon and imgIcon are specified the imgIcon will be used!** | Array or single String | null |
+| classes | A String containing html classes that should be added to the wrappers. If you use multiple instances of the module you can style them differently this way. | String | null |
+| embed | Either a single URL as String or a Array containing Strings and/or more embed objects (see next section for more information). | Array or single String | null |
+
+## The embed array
+
+The module supports multiple ways to specify the websites you want to integrate. The embed array can contain either Strings or objects. The objects can contain the same options "positions", "attributes". "title", "fontIcon", "imgIcon", classes and "embed" as in the main configuration. It is possible to nest the embed objects this way.
+
+Additionally the "profile" option can be used to set a space separated String of profiles in which this elements should be displayed.
+
+**If no positions or attributes are defined in the embed array but in the main configuration the ones in the main configuration will be used!**
+
+Lets look at a bigger example:
+
+```json5
+{
+ module: "MMM-EmbedURL",
+ position: "top_center",
+ header: "Embed-URL",
+ config: {
+  updateInterval: 30,
+  embed: [
+   "https://magicmirror.builders/",
+   {
+    title: "Dummy1",
+    profiles: "pageR1 pageL1",
+    attributes: [
+     "frameborder=0",
+     "allowfullscreen",
+     "allow=accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    ],
+    embed: [
+     "https://www.youtube.com/embed/dIHr96KqfDI?autoplay=0",
+     "https://dummy:3000/temperaturen?orgId=2&from=1666840667772&to=1666862267772&panelId=4",
+    ]
+   },
+   {
+    title: ["Dummy2", "Dummy2-2"],
+    fontIcon: "fa fa-tint",
+    profiles: "pageR2",
+    positions: "ite",
+    embed: [
+     "https://dummy:3000/temperaturen?orgId=2&from=1666840667772&to=1666862267772&panelId=4",
+     "https://dummy:3000/temperaturen?orgId=2&from=1666840776401&to=1666862376402&panelId=2",
+     "https://dummy:3000/temperaturen?orgId=2&from=1666840963687&to=1666862563687&panelId=6"
+    ]
+   },
+   {
+    imgIcon: "./modules/MMM-EmbedURL/icons/tom.jpg",
+    classes: "dummy3 myDummy",
+    embed: [
+     "https://dummy:3000/humidity?orgId=2&from=1666840580521&to=1666862180521&panelId=4",
+     "https://dummy:3000/humidity?orgId=2&from=1666840621970&to=1666862221970&panelId=2",
+     
+    ]
+   },
+  ]
+ },
+ classes: "pageC pageL1 pageR1 pageR2"
+},
+```
+
+The following happens in this example:
+
+* The module is only visible if profile "pageC", "pageL1", "pageR1" or "pageR2" is active
+* The MagicMirror² page will be added in a iframe
+* Three embed objects are created
+* The first object:
+  * Defines a single title ("Dummy1") and is only visible if profile "pageR1" or "pageL1" is active
+  * Defines other attributes than the default ones
+  * Addes two elements: A video of youtube and a dummy
+* The second object:
+  * Defines two titles "Dummy2" and "Dummy2-2" and is only visible if profile "pageR2" is active
+  * Defines a fontIcon
+  * Addes three dummy elements
+  * The icon should be added first, after it th title followed by the embeded websites
+* The third object
+  * Is visible at all profiles
+  * Defines a image icon
+  * Adds two dummy elements
+  * All elements get the css classes "dummy3" and "myDummy" added
+
+## Styling
+
+The module uses flexbox layout and all styling is done via css. Even the size of the embeded elements is controlled via css.
+All wrappers get default classes added additional classes can be configured with the options described above.
+The class "embed" will be added to the root wrapper!
+
+Look at the [embedURL.css](embedURL.css) file for inspiration but override and style in your "custom.css"!
+
+The size of the embeded elements is controlled i.e.:
+
+```css
+.embed .embeded {
+    max-width: 800px;
+    max-height: 400px;
+}
 ```
