@@ -14,6 +14,9 @@ Module.register('MMM-EmbedURL', {
 		updateInterval: 60, //how often should the module be refreshed
 		animationSpeed: 500, //use this animation speed if the dom objects of the module gets updated
 		positions: "tie",
+		attributes: [
+			"frameborder=0"
+		]
 	},
 
 	suspend: function () {
@@ -146,13 +149,20 @@ Module.register('MMM-EmbedURL', {
 		}
 	},
 
-	getEmbedElement: function(subConfig, additionalClasses){
+	getEmbedElement: function(subConfig, additionalClasses, attributes){
 		const self = this
 		if(subConfig != null){
 			embedElement = document.createElement(self.config["embedElementType"])
 			embedElement.setAttribute("src", subConfig)
-			if (self.config["embedElementType"] === "iframe"){
-				embedElement.setAttribute("frameborder", 0)
+			if(attributes != null){
+				console.log(JSON.stringify(attributes))
+				for(let curAttribute of attributes){
+					let attArray = curAttribute.split("=")
+					let key = attArray[0].replaceAll(" ")
+					let value = attArray[1] || ""
+
+					embedElement.setAttribute(key, value)
+				}
 			}
 			embedElement.classList.add("embeded")
 			additionalClasses.forEach(element => embedElement.classList.add(element))
@@ -163,7 +173,7 @@ Module.register('MMM-EmbedURL', {
 		}
 	},
 
-	getWrapperElement: function(subConfig, fallbackPositions, depth=0){
+	getWrapperElement: function(subConfig, fallbackPositions, fallbackAttributes, depth=0){
 		if (subConfig != null){
 			const self = this
 
@@ -183,6 +193,11 @@ Module.register('MMM-EmbedURL', {
 			let positions = subConfig["positions"] || null
 			if(positions == null){
 				positions = fallbackPositions
+			}
+
+			let attributes = subConfig["attributes"] || null
+			if (attributes == null){
+				attributes = fallbackAttributes
 			}
 
 			let wrapper = document.createElement(self.config["basicElementType"])
@@ -209,16 +224,16 @@ Module.register('MMM-EmbedURL', {
 						let curEmbed = embedConfig[idx]
 						let curEmbedElement = null
 						if (typeof curEmbed === "string"){
-							curEmbedElement = self.getEmbedElement(curEmbed, classes)
+							curEmbedElement = self.getEmbedElement(curEmbed, classes, attributes)
 						} else {
-							curEmbedElement = self.getWrapperElement(curEmbed || null, positions, depth+1)
+							curEmbedElement = self.getWrapperElement(curEmbed || null, positions, attributes, depth+1)
 						}
 						if(curEmbedElement != null){
 							embedElement.appendChild(curEmbedElement)
 						}
 					}
 				} else {
-					embedElement = self.getEmbedElement(embedConfig, classes)
+					embedElement = self.getEmbedElement(embedConfig, classes, attributes)
 				}
 			}
 			
@@ -264,7 +279,7 @@ Module.register('MMM-EmbedURL', {
 	getDom: function () {
 		const self = this
 
-		let wrapper = self.getWrapperElement(self.config, self.config.positions, 0)
+		let wrapper = self.getWrapperElement(self.config, self.config.positions, self.config.attributes, 0)
 
 		if (wrapper == null){
 			wrapper = document.createElement(self.config["basicElementType"])
