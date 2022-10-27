@@ -1,0 +1,37 @@
+.embed.rootWrapper, .embed .embededWrapper, .embed .embededSubWrapper {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.embed.rootWrapper {
+    flex-direction: column;
+}
+
+.embed .embededSubWrapper0 {
+    flex-direction: row;
+    align-items: flex-start;
+}
+
+.embed .iconWrapper, .embed .titleWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    gap: 10px;
+}
+
+.embed .fontIcon {
+    line-height: 1.5;
+}
+
+.embed .imgIcon {
+    width: 32px;
+}
+
+.embed .embeded {
+    max-width: 800px;
+    max-height: 400px;
+}
