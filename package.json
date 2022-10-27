@@ -1,0 +1,19 @@
+{
+  "name": "MMM-EmbedURL",
+  "version": "0.0.1",
+  "description": "",
+  "main": "MMM-EmbedURL",
+  "dependencies": {
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Tom-Hirschberger/MMM-EmbedURL.git"
+  },
+  "author": "Thomas Hirschberger",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Tom-Hirschberger/MMM-EmbedURL/issues"
+  },
+  "homepage": "https://github.com/Tom-Hirschberger/MMM-EmbedURL/#readme"
+}
