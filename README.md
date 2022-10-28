@@ -54,9 +54,15 @@ In this a very basic example with the following result:
 * All embeded pages will get the attribute "frameborder=0" set
 * Two pages will be embedded
 
-## Webview usage
+## Embed sites that forbid embedding and Cookie banners
 
-If do want to embed pages that possibly forbid embedding (like my NodeRED dashboard) but you use the build in electron browser to view the mirror you can use [Webview](https://www.electronjs.org/docs/latest/api/webview-tag) instead. Webview is a little bit slower than IFrame but it ignores the forbid to embed flag. YEEEAAAH!
+If the site(s) you want to embed forbid the embedding by setting some headers there are multiple ways them embed them anyway.
+
+There are extensions for at least Firefox, Chrome and Chromium to remove Cookie banners as well.
+
+### Webview usage
+
+If do use the build in electron browser to view the mirror you can use [Webview](https://www.electronjs.org/docs/latest/api/webview-tag) instead. Webview is a little bit slower than IFrame but it ignores the forbid to embed flag. YEEEAAAH!
 
 **To activate Webview you need to weaken the security settings of electron!**
 
@@ -75,6 +81,20 @@ let config = {
   basePath: ...
 ...
 ```
+
+You then need to set the "basicElementType" to "webview" in the module configuration.
+
+### Firefox browser
+
+You can use the [Requestly Extension](https://requestly.io/blog/bypass-iframe-busting-header/) which is able to remove the headers that prevent sites of being embedded! You then can use a iframe to embed the site.
+
+If the site uses a cookie banner you want to hide you may look at the [Super-Agent Extension](https://addons.mozilla.org/de/firefox/addon/super-agent/) which does the job even in iframes!
+
+### Chrome and Chromium browser
+
+You can use the [Requestly Extension](https://requestly.io/blog/bypass-iframe-busting-header/) which is able to remove the headers that prevent sites of being embedded! You then can use a iframe to embed the site.
+
+If the site uses a cookie banner you want to hide you may look at the [I-Dont-Care-About-Cookies Extension](https://chrome.google.com/webstore/detail/i-dont-care-about-cookies/fihnjjcciajhdojfnbdddfaoknhalnja) which does the job even in iframes!
 
 ## General options
 
