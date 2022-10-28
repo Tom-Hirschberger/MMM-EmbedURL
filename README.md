@@ -94,7 +94,7 @@ let config = {
 
 ## The embed array
 
-The module supports multiple ways to specify the websites you want to integrate. The embed array can contain either Strings or objects. The objects can contain the same options "positions", "attributes". "title", "fontIcon", "imgIcon", classes and "embed" as in the main configuration. It is possible to nest the embed objects this way.
+The module supports multiple ways to specify the websites you want to integrate. The embed array can contain either Strings or objects. The objects can contain the same options "positions", "attributes". "title", "fontIcon", "imgIcon", "classes", "embedElementType" and "embed" as in the main configuration. It is possible to nest the embed objects this way and configure different options for them.
 
 Additionally the "profile" option can be used to set a space separated String of profiles in which this elements should be displayed.
 
@@ -138,6 +138,7 @@ Lets look at a bigger example:
    {
     imgIcon: "./modules/MMM-EmbedURL/icons/tom.jpg",
     classes: "dummy3 myDummy",
+    embedElementType: "webview",
     embed: [
      "https://dummy:3000/humidity?orgId=2&from=1666840580521&to=1666862180521&panelId=4",
      "https://dummy:3000/humidity?orgId=2&from=1666840621970&to=1666862221970&panelId=2",
@@ -167,7 +168,7 @@ The following happens in this example:
 * The third object
   * Is visible at all profiles
   * Defines a image icon
-  * Adds two dummy elements
+  * Adds two dummy elements but not uses the default "iframe" element to embed but "webview" instead
   * All elements get the css classes "dummy3" and "myDummy" added
 
 If you think about the dummy URLs look a little bit like URLs of Grafana panels you are right. I use the module to show my Grafana charts. Examples of howto setup InfluxDB and Grafana are included in the [doc](doc) directory!
