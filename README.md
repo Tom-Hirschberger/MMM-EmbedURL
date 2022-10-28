@@ -58,6 +58,12 @@ In this a very basic example with the following result:
 
 If do want to embed pages that possibly forbid embedding (like my NodeRED dashboard) but you use the build in electron browser to view the mirror you can use [Webview](https://www.electronjs.org/docs/latest/api/webview-tag) instead. Webview is a little bit slower than IFrame but it ignores the forbid to embed flag. YEEEAAAH!
 
+**If you use an other browser (Firefox, Chrome, etc.) you may look at the [Requestly Extension](https://requestly.io/blog/bypass-iframe-busting-header/) which is able to remove the headers that prevent sites of being embedded**
+
+**If you use Firefox and want to consent cookies automaticall (to hide the banner) you may look at the [Super-Agent Extension](https://addons.mozilla.org/de/firefox/addon/super-agent/) which does the job even in iframes!**
+
+**If you use Chrome and want to consent cookies automaticall (to hide the banner) you may look at the [I-Dont-Care-About-Cookies Extension](https://chrome.google.com/webstore/detail/i-dont-care-about-cookies) which does the job even in iframes!**
+
 **To activate Webview you need to weaken the security settings of electron!**
 
 Set the following options in the mirrors "config.js" file (only the electronOptions!):
