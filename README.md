@@ -1,7 +1,11 @@
 # MMM-EmbedURL
 
-This is a MagicMirror² module which embeds other websites either by iframe (default) or webview to your mirror. Multiple pages can be embeded at once and the pages can be refreshed periodically (all websites get refreshed at the same time). As webview usage is possible (only if electron browser is used) even pages that forbid embedding by iframe can be embedded (i.e. NodeRed Dashboard).
-I use it to embed my Grafana panels.
+This is a MagicMirror² module which embeds other websites either by "iframe" (default), "webview" or a custom HTML-element to your mirror.
+Multiple pages can be embeded at once and the pages can be refreshed periodically (all websites get refreshed at the same time).
+As "webview" usage is possible (only if electron browser is used) even pages that forbid embedding by "iframe" can be embedded (i.e. NodeRed Dashboard).
+
+
+I use it to embed my Grafana panels, my NodeRED-Dashboard and a Webpage with a Live-Webcam to my mirror.
 
 <p align="center">
  <img src="doc/screenshots/SomeGrafanaPanels.png" alt="Screen showing some Grafana panels" width="600px"/>
@@ -9,9 +13,9 @@ I use it to embed my Grafana panels.
 
 ## Basic features
 
-* Embed other websites either by iframe or webview
-* Add icon(s) or title(s) before or after the embeded website
-* Arrange sites to groups
+* Embed other websites either by "iframe", "webview" or a custom tag
+* Add icon(s) or title(s) before or after the embeded website (position can be configured)
+* Set different attributes for the elements by nesting
 * Periodically refresh the embedded websites (all sites will be refreshed at once)
 * Display embeded elements depending to the current profile (see [MMM-ProfileSwitcher](https://github.com/tosti007/MMM-ProfileSwitcher))
 
@@ -20,7 +24,7 @@ I use it to embed my Grafana panels.
 ```bash
 cd ~/MagicMirror/modules
 git clone https://github.com/Tom-Hirschberger/MMM-EmbedURL.git
-cd MMM-EmbedURL.git
+cd MMM-EmbedURL
 npm install
 ```
 
