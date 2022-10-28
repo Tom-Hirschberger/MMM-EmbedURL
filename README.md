@@ -1,6 +1,6 @@
 # MMM-EmbedURL
 
-This is a MagicMirror² module which embeds other websites either by iframe (default) or webview to your mirror. Multiple pages can be embeded at once and the pages can be refreshed periodically (all websites get refreshed at the same time). As webview usage is possible (only if electron or chrome is used) even pages that forbid embedding by iframe can be embedded (i.e. NodeRed Dashboard).
+This is a MagicMirror² module which embeds other websites either by iframe (default) or webview to your mirror. Multiple pages can be embeded at once and the pages can be refreshed periodically (all websites get refreshed at the same time). As webview usage is possible (only if electron browser is used) even pages that forbid embedding by iframe can be embedded (i.e. NodeRed Dashboard).
 I use it to embed my Grafana panels.
 
 <p align="center">
@@ -53,6 +53,28 @@ In this a very basic example with the following result:
 * All embeded pages will be refreshed every 120 seconds
 * All embeded pages will get the attribute "frameborder=0" set
 * Two pages will be embedded
+
+## Webview usage
+
+If do want to embed pages that possibly forbid embedding (like my NodeRED dashboard) but you use the build in electron browser to view the mirror you can use [Webview](https://www.electronjs.org/docs/latest/api/webview-tag) instead. Webview is a little bit slower than IFrame but it ignores the forbid to embed flag. YEEEAAAH!
+
+**To activate Webview you need to weaken the security settings of electron!**
+
+Set the following options in the mirrors "config.js" file (only the electronOptions!):
+
+```json5
+...
+let config = {
+  electronOptions: {
+    webPreferences: {
+      webviewTag: true,
+    }
+  },
+  address: ...
+  port: ...
+  basePath: ...
+...
+```
 
 ## General options
 
@@ -158,11 +180,13 @@ The class "embed" will be added to the root wrapper!
 
 Look at the [embedURL.css](embedURL.css) file for inspiration but override and style in your "custom.css"!
 
-The size of the embeded elements is controlled i.e.:
+The size of the embeded elements is controlled in example with:
 
 ```css
 .embed .embeded {
-    max-width: 800px;
-    max-height: 400px;
+    width: 800px;
+    height: 400px;
 }
 ```
+
+I included a example of viewing a [webcam](doc/screenshots/webcam.png) showing how to embed it and move the position to hide the menu and footer. Look at the corresponding [config](doc/configs/webcam-config.js) and [css](doc/configs/webcam-custom.css) for more details.

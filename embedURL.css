@@ -23,6 +23,10 @@
     gap: 10px;
 }
 
+.ebmed .title {
+    text-decoration: underline;
+}
+
 .embed .fontIcon {
     line-height: 1.5;
 }
@@ -31,7 +35,7 @@
     width: 32px;
 }
 
-.embed .embeded {
-    max-width: 800px;
-    max-height: 400px;
-}
+/* .embed .embeded {
+    width: 800px;
+    height: 400px;
+} */

@@ -1,0 +1,13 @@
+.embed .videos.embededSubWrapper1 {
+    width    : 600px;
+    height   : 400px;
+    overflow : hidden;
+    position : relative;
+}
+  
+.embed .embeded.videos {
+    position : absolute;
+    top: -138px;
+    height: 750px;
+    max-height: 750px;
+}
