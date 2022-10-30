@@ -152,7 +152,7 @@ Module.register('MMM-EmbedURL', {
 	getEmbedElement: function(subConfig, additionalClasses, attributes, embedElementType){
 		const self = this
 		if(subConfig != null){
-			embedElement = document.createElement(embedElementType)
+			let embedElement = document.createElement(embedElementType)
 			embedElement.setAttribute("src", subConfig)
 			if(attributes != null){
 				console.log(JSON.stringify(attributes))
