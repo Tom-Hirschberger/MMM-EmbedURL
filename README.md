@@ -34,7 +34,7 @@ Add the following code to your ~/MagicMirror/config/config.js:
 
 ```json5
 {
-  module: "MMM-MMM-EmbedURL",
+  module: "MMM-EmbedURL",
   position: "top_center",
   header: "Embed-URL",
   config: {
