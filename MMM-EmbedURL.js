@@ -29,9 +29,9 @@ Module.register('MMM-EmbedURL', {
 	},
 
 
-	/*getScripts: function () {
-		return [this.file('node_modules/jsonpath-plus/dist/index-browser-umd.js')];
-	},*/
+	getScripts: function () {
+		return [this.file('node_modules/@iconify/iconify/dist/iconify.min.js')];
+	},
 
 
 	getStyles: function () {
@@ -81,7 +81,9 @@ Module.register('MMM-EmbedURL', {
 
 	getFontIconElement: function(subConfig, additionalClasses){
 		const self = this
+		console.log("Trying to get font icon element")
 		if(subConfig != null){
+			console.log("subConfig != null")
 			let fontIconElement = null
 			if(Array.isArray(subConfig)){
 				fontIconElement = document.createElement(self.config["basicElementType"])
@@ -89,8 +91,16 @@ Module.register('MMM-EmbedURL', {
 
 				let idx = 0
 				for (let curIcon of subConfig) {
-					let curIconElement = document.createElement("i")
-					curIcon.split(" ").forEach(element => curIconElement.classList.add(element))
+					let curIconElement
+					if(curIcon.startsWith("fa ")){
+						curIconElement = document.createElement("i")
+						curIcon.split(" ").forEach(element => curIconElement.classList.add(element))
+						curIconElement.setAttribute("aria-hidden", "true")
+					} else {
+						curIconElement = document.createElement("span")
+						curIconElement.classList.add("iconify-inline")
+						curIconElement.setAttribute("data-icon", curIcon)
+					}
 					curIconElement.classList.add("fontIcon")
 					curIconElement.classList.add("fontIcon" + idx)
 					additionalClasses.forEach(element => curIconElement.classList.add(element))
@@ -98,8 +108,15 @@ Module.register('MMM-EmbedURL', {
 					idx += 1
 				}
 			} else {
-				fontIconElement = document.createElement("i")
-				subConfig.split(" ").forEach(element => fontIconElement.classList.add(element))
+				if(subConfig.startsWith("fa ")){
+					fontIconElement = document.createElement("i")
+					subConfig.split(" ").forEach(element => fontIconElement.classList.add(element))
+					fontIconElement.setAttribute("aria-hidden", "true")
+				} else {
+					fontIconElement = document.createElement("span")
+					fontIconElement.classList.add("iconify-inline")
+					fontIconElement.setAttribute("data-icon", subConfig)
+				}
 				fontIconElement.classList.add("fontIcon")
 			}
 
@@ -107,6 +124,7 @@ Module.register('MMM-EmbedURL', {
 
 			return fontIconElement
 		} else {
+			console.log("subConfig is null")
 			return null
 		}
 	},

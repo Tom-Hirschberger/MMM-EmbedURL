@@ -31,6 +31,11 @@
     line-height: 1.5;
 }
 
+.MMM-EmbedURL .embed .fontIcon.iconify {
+    width: 32px;
+    height: 32px;
+}
+
 .MMM-EmbedURL .embed .imgIcon {
     width: 32px;
 }

@@ -4,6 +4,7 @@
   "description": "",
   "main": "MMM-EmbedURL",
   "dependencies": {
+    "@iconify/iconify": "latest"
   },
   "devDependencies": {},
   "repository": {
