@@ -62,6 +62,10 @@ In this a very basic example with the following result:
 
 If the site(s) you want to embed forbid the embedding by setting some headers there are multiple ways them embed them anyway.
 
+**PLEASE RESPECT THE CONTENT POLICY OF THE PAGES YOU ARE EMBEDDING!**
+  
+As most of the pages forbid embeding only to avoid Cross-Site-Scripting attacks and these are very unlikly at the mirror i will show some ways the embed pages that forbid embedding anyway.
+
 There are extensions for at least Firefox, Chrome and Chromium to remove Cookie banners as well.
 
 ### Webview usage
