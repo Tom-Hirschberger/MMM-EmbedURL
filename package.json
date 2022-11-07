@@ -1,9 +1,10 @@
 {
   "name": "MMM-EmbedURL",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "description": "",
   "main": "MMM-EmbedURL",
   "dependencies": {
+    "@iconify/iconify": "latest"
   },
   "devDependencies": {},
   "repository": {

@@ -14,7 +14,7 @@ I use it to embed my Grafana panels, my NodeRED-Dashboard and a Webpage with a L
 ## Basic features
 
 * Embed other websites either by "iframe", "webview" or a custom tag
-* Add icon(s) or title(s) before or after the embeded website (position can be configured)
+* Add [Fontawesome 4.7](https://fontawesome.com/v4/icons/) or [Iconify](https://icon-sets.iconify.design/) icon(s) or title(s) before or after the embeded website (position can be configured)
 * Set different attributes for the elements by nesting
 * Periodically refresh the embedded websites (all sites will be refreshed at once)
 * Display embeded elements depending to the current profile (see [MMM-ProfileSwitcher](https://github.com/tosti007/MMM-ProfileSwitcher))
@@ -62,6 +62,10 @@ In this a very basic example with the following result:
 
 If the site(s) you want to embed forbid the embedding by setting some headers there are multiple ways them embed them anyway.
 
+**PLEASE RESPECT THE CONTENT POLICY OF THE PAGES YOU ARE EMBEDDING!**
+  
+As most of the pages forbid embeding only to avoid Cross-Site-Scripting attacks and these are very unlikly at the mirror i will show some ways the embed pages that forbid embedding anyway.
+
 There are extensions for at least Firefox, Chrome and Chromium to remove Cookie banners as well.
 
 ### Webview usage
@@ -88,6 +92,19 @@ let config = {
 
 You then need to set the "basicElementType" to "webview" in the module configuration.
 
+**As of MagicMirror² version 2.22.0 you can use Iframe to embed the site and set the two config options:**
+
+```json5
+...
+let config = {
+  ignoreXOriginHeader: true,
+  ignoreContentSecurityPolicy: true,
+  address: ...
+  port: ...
+  basePath: ...
+...
+```
+
 ### Firefox browser
 
 You can use the [Requestly Extension](https://requestly.io/blog/bypass-iframe-busting-header/) which is able to remove the headers that prevent sites of being embedded! You then can use a iframe to embed the site.
@@ -111,7 +128,7 @@ If the site uses a cookie banner you want to hide you may look at the [I-Dont-Ca
 | positions | The elements will be added in the order of the characters in this string (i=icon, t=title, e=embeded). | String | "tie" |
 | attributes | This is a array with additional attributes that should be added to the embeded html element. | Array of Strings | \[<br>"frameborder=0"<br>\] |
 | title | Either a single String or a Array of String that will be added as title. It is supported to add html tags to the title! | String | null |
-| fontIcon | A single String or a Array of String containing the [fontawesome 4.7](https://fontawesome.com/v4/icons/) class definition of icons (i.e. "fa fa-tint"). | Array or single String | null |
+| fontIcon | A single String or a Array of String containing the [Fontawesome 4.7](https://fontawesome.com/v4/icons/) or [Iconify](https://iconify.design/) class definition of icons (i.e. "fa fa-tint" or "fluent-emoji-flat:test-tube"). | Array or single String | null |
 | imgIcon | If you want to use a image as icon instead of [fontawesome 4.7](https://fontawesome.com/v4/icons/) icons you can specify a single URL or a Array of URLs with this option. **If both fontIcon and imgIcon are specified the imgIcon will be used!** | Array or single String | null |
 | classes | A String containing html classes that should be added to the wrappers. If you use multiple instances of the module you can style them differently this way. | String | null |
 | embed | Either a single URL as String or a Array containing Strings and/or more embed objects (see next section for more information). | Array or single String | null |
@@ -208,7 +225,7 @@ Look at the [embedURL.css](embedURL.css) file for inspiration but override and s
 The size of the embeded elements is controlled in example with:
 
 ```css
-.embed .embeded {
+.MMM-EmbedURL .embed .embeded {
     width: 800px;
     height: 400px;
 }

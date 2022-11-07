@@ -1,4 +1,4 @@
-.embed.rootWrapper, .embed .embededWrapper, .embed .embededSubWrapper {
+.MMM-EmbedURL .embed.rootWrapper, .embed .embededWrapper, .embed .embededSubWrapper {
     display: flex;
     width: 100%;
     flex-direction: column;
@@ -6,16 +6,16 @@
     gap: 10px;
 }
 
-.embed.rootWrapper {
+.MMM-EmbedURL .embed.rootWrapper {
     flex-direction: column;
 }
 
-.embed .embededSubWrapper0 {
+.MMM-EmbedURL .embed .embededSubWrapper0 {
     flex-direction: row;
     align-items: flex-start;
 }
 
-.embed .iconWrapper, .embed .titleWrapper {
+.MMM-EmbedURL .embed .iconWrapper, .embed .titleWrapper {
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -23,19 +23,24 @@
     gap: 10px;
 }
 
-.ebmed .title {
+.MMM-EmbedURL .ebmed .title {
     text-decoration: underline;
 }
 
-.embed .fontIcon {
+.MMM-EmbedURL .embed .fontIcon {
     line-height: 1.5;
 }
 
-.embed .imgIcon {
+.MMM-EmbedURL .embed .fontIcon.iconify {
+    width: 32px;
+    height: 32px;
+}
+
+.MMM-EmbedURL .embed .imgIcon {
     width: 32px;
 }
 
-/* .embed .embeded {
+/* .MMM-EmbedURL .embed .embeded {
     width: 800px;
     height: 400px;
 } */
