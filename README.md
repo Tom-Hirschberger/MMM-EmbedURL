@@ -74,20 +74,37 @@ If do use the build in electron browser to view the mirror you can use [Webview]
 
 **To activate Webview you need to weaken the security settings of electron!**
 
-Set the following options in the mirrors "config.js" file (only the electronOptions!):
+You can do that by adding:
 
 ```json5
-...
+  electronOptions: {
+    webPreferences: {
+      webviewTag: true,
+    }
+  },
+```
+
+to your general configuration in your "config.js" file.
+
+The start of the file then will look something like:
+
+```json5
+/* MagicMirror² Config Sample
+ *
+ * By Michael Teeuw https://michaelteeuw.nl
+ * MIT Licensed.
+ *
+ * For more information on how you can configure this file
+ * see https://docs.magicmirror.builders/configuration/introduction.html
+ * and https://docs.magicmirror.builders/modules/configuration.html
+ */
 let config = {
   electronOptions: {
     webPreferences: {
       webviewTag: true,
     }
   },
-  address: ...
-  port: ...
-  basePath: ...
-...
+  address: localhost
 ```
 
 You then need to set the "basicElementType" to "webview" in the module configuration.
@@ -95,14 +112,18 @@ You then need to set the "basicElementType" to "webview" in the module configura
 **As of MagicMirror² version 2.22.0 you can use Iframe to embed the site and set the two config options:**
 
 ```json5
-...
+/* MagicMirror² Config Sample
+ *
+ * By Michael Teeuw https://michaelteeuw.nl
+ * MIT Licensed.
+ *
+ * For more information on how you can configure this file
+ * see https://docs.magicmirror.builders/configuration/introduction.html
+ * and https://docs.magicmirror.builders/modules/configuration.html
+ */
 let config = {
   ignoreXOriginHeader: true,
   ignoreContentSecurityPolicy: true,
-  address: ...
-  port: ...
-  basePath: ...
-...
 ```
 
 ### Firefox browser
