@@ -39,6 +39,16 @@ sudo ufw allow 3000
 
 ### Configure HTTPS access to Grafana (optional)
 
+First of all you need a certificate and key file for your host. If you do not have one try the following steps:
+
+```bash
+openssl genrsa -out grafana.key 2048
+openssl req -new -key grafana.key -out grafana.csr
+openssl x509 -req -days 365 -in grafana.csr -signkey grafana.key -out grafana.crt
+sudo mv grafana.crt /etc/grafana/grafana-cert.pem
+sudo mv grafana.key /etc/grafana/grafana-key.pem
+```
+
 Copy the certificate and the key to use to /etc/grafana and change the permissions to grafana user!
 
 ```bash
