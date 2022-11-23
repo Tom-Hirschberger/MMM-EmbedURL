@@ -107,7 +107,9 @@ let config = {
   address: localhost
 ```
 
-You then need to set the "basicElementType" to "webview" in the module configuration.
+You then need to set the "embedElementType" to "webview" in the module configuration.
+
+:warning: Make sure to set "basicElementType" to "div" and not "span". "div" is default as of version 0.0.4 of the module.
 
 **As of MagicMirror² version 2.22.0 you can use Iframe to embed the site and set the two config options:**
 
@@ -140,12 +142,14 @@ If the site uses a cookie banner you want to hide you may look at the [I-Dont-Ca
 
 ## General options
 
+:warning: The default "basicElementType" changed with version 0.0.4 from "span" to "div" cause webview does not work with "span" properly.
+
 | Option  | Description | Type | Default |
 | ------- | --- | --- | --- |
-| updateInterval | The websites will be refreshed in this interval provided in seconds. | Integer | 60 |
+| updateInterval | The websites will be refreshed in this interval provided in seconds. Set the value to 0 or lower to disable automatic refresh. | Integer | 60 |
 | animationSpeed | The creation of the elements will be animated with this speed in milliseconds. | Integer | 500 |
 | embedElementType | The websites will be embeded with this html element. | String | "iframe" |
-| basicElementType | The wrappers use this type of html element. | String | "span" |
+| basicElementType | The wrappers use this type of html element. | String | "div" |
 | positions | The elements will be added in the order of the characters in this string (i=icon, t=title, e=embeded). | String | "tie" |
 | attributes | This is a array with additional attributes that should be added to the embeded html element. | Array of Strings | \[<br>"frameborder=0"<br>\] |
 | title | Either a single String or a Array of String that will be added as title. It is supported to add html tags to the title! | String | null |
