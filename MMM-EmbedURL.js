@@ -9,7 +9,7 @@
 Module.register('MMM-EmbedURL', {
 
 	defaults: {
-		basicElementType: "span", //this module uses a lot of wrappers and basic elements. This option decides about the basic element (div or span)
+		basicElementType: "div", //this module uses a lot of wrappers and basic elements. This option decides about the basic element (div or span)
 		embedElementType: "iframe", //the elements can either be embeded as iframe webview
 		updateInterval: 60, //how often should the module be refreshed
 		animationSpeed: 500, //use this animation speed if the dom objects of the module gets updated
@@ -21,11 +21,12 @@ Module.register('MMM-EmbedURL', {
 
 	suspend: function () {
 		const self = this
+		self.resetTimer(-1)
 	},
 
 	resume: function () {
 		const self = this
-		self.updateDom(self.config.animationSpeed)
+		self.resetTimer(self.config.updateInterval)
 	},
 
 
@@ -332,25 +333,24 @@ Module.register('MMM-EmbedURL', {
 
 		self.sendSocketNotification("CONFIG", self.config);
 
-		if (self.config.updateInterval > 0){
-			self.resetTimer()
-		}
+		self.resetTimer(self.config.updateInterval)
 	},
 
-	resetTimer: function () {
+	resetTimer: function (interval) {
 		const self = this
 		if (self.refreshTimer) {
 			clearTimeout(self.refreshTimer)
 			self.refreshTimer = null
 		}
-		if (self.config.updateInterval > 0){
-			self.refreshTimer = setTimeout(() => {
-				self.resetTimer()
-			}, self.config.updateInterval * 1000)
-		}
 
-		if (!self.hidden) {
-			self.updateDom(self.config.animationSpeed)
+		if (interval > 0) {
+			self.refreshTimer = setTimeout(() => {
+				self.resetTimer(interval)
+			}, interval * 1000)
+
+			if (!self.hidden) {
+				self.updateDom(self.config.animationSpeed)
+			}
 		}
 	},
 
