@@ -332,18 +332,22 @@ Module.register('MMM-EmbedURL', {
 
 		self.sendSocketNotification("CONFIG", self.config);
 
-		self.resetTimer()
+		if (self.config.updateInterval > 0){
+			self.resetTimer()
+		}
 	},
 
 	resetTimer: function () {
 		const self = this
 		if (self.refreshTimer) {
 			clearTimeout(self.refreshTimer)
-			refreshTimer = null
+			self.refreshTimer = null
 		}
-		self.refreshTimer = setTimeout(() => {
-			self.resetTimer()
-		}, self.config.updateInterval * 1000)
+		if (self.config.updateInterval > 0){
+			self.refreshTimer = setTimeout(() => {
+				self.resetTimer()
+			}, self.config.updateInterval * 1000)
+		}
 
 		if (!self.hidden) {
 			self.updateDom(self.config.animationSpeed)
