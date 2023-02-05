@@ -82,9 +82,9 @@ Module.register('MMM-EmbedURL', {
 
 	getFontIconElement: function(subConfig, additionalClasses){
 		const self = this
-		console.log("Trying to get font icon element")
+		// console.log("Trying to get font icon element")
 		if(subConfig != null){
-			console.log("subConfig != null")
+			// console.log("subConfig != null")
 			let fontIconElement = null
 			if(Array.isArray(subConfig)){
 				fontIconElement = document.createElement(self.config["basicElementType"])
@@ -125,7 +125,6 @@ Module.register('MMM-EmbedURL', {
 
 			return fontIconElement
 		} else {
-			console.log("subConfig is null")
 			return null
 		}
 	},
@@ -168,13 +167,22 @@ Module.register('MMM-EmbedURL', {
 		}
 	},
 
-	getEmbedElement: function(subConfig, additionalClasses, attributes, embedElementType){
+	getEmbedElement: function(subConfig, additionalClasses, attributes, embedElementType, appendTimestamp){
 		const self = this
 		if(subConfig != null){
 			let embedElement = document.createElement(embedElementType)
-			embedElement.setAttribute("src", subConfig)
+			if ((typeof appendTimestamp !== "undefined") &&
+				appendTimestamp)
+			{
+				let url = new URL(subConfig)
+				url.searchParams.append('timestamp', Math.floor(Date.now() / 1000))
+				embedElement.setAttribute("src", url)
+			} else {
+				embedElement.setAttribute("src", subConfig)
+			}
+			
 			if(attributes != null){
-				console.log(JSON.stringify(attributes))
+				// console.log(JSON.stringify(attributes))
 				for(let curAttribute of attributes){
 					let attArray = curAttribute.split("=")
 					let key = attArray[0]
@@ -195,7 +203,7 @@ Module.register('MMM-EmbedURL', {
 		}
 	},
 
-	getWrapperElement: function(subConfig, fallbackPositions, fallbackAttributes, fallbackEmbedElementType, depth=0){
+	getWrapperElement: function(subConfig, fallbackPositions, fallbackAttributes, fallbackEmbedElementType, fallbackAppendTimestamp, depth=0){
 		if (subConfig != null){
 			const self = this
 
@@ -227,6 +235,13 @@ Module.register('MMM-EmbedURL', {
 				embedElementType = fallbackEmbedElementType
 			}
 
+			let appendTimestamp
+			if (typeof subConfig["appendTimestamp"] !== "undefined"){
+				appendTimestamp = subConfig["appendTimestamp"]
+			} else {
+				appendTimestamp = fallbackAppendTimestamp
+			}
+
 			let wrapper = document.createElement(self.config["basicElementType"])
 			wrapper.classList.add("embededWrapper")
 			wrapper.classList.add("embededWrapper"+depth)
@@ -251,16 +266,16 @@ Module.register('MMM-EmbedURL', {
 						let curEmbed = embedConfig[idx]
 						let curEmbedElement = null
 						if (typeof curEmbed === "string"){
-							curEmbedElement = self.getEmbedElement(curEmbed, classes, attributes, embedElementType)
+							curEmbedElement = self.getEmbedElement(curEmbed, classes, attributes, embedElementType, appendTimestamp)
 						} else {
-							curEmbedElement = self.getWrapperElement(curEmbed || null, positions, attributes, embedElementType, depth+1)
+							curEmbedElement = self.getWrapperElement(curEmbed || null, positions, attributes, embedElementType, appendTimestamp, depth+1)
 						}
 						if(curEmbedElement != null){
 							embedElement.appendChild(curEmbedElement)
 						}
 					}
 				} else {
-					embedElement = self.getEmbedElement(embedConfig, classes, attributes, embedElementType)
+					embedElement = self.getEmbedElement(embedConfig, classes, attributes, embedElementType, appendTimestamp)
 				}
 			}
 			

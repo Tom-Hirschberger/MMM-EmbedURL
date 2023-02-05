@@ -152,6 +152,7 @@ If the site uses a cookie banner you want to hide you may look at the [I-Dont-Ca
 | basicElementType | The wrappers use this type of html element. | String | "div" |
 | positions | The elements will be added in the order of the characters in this string (i=icon, t=title, e=embeded). | String | "tie" |
 | attributes | This is a array with additional attributes that should be added to the embeded html element. | Array of Strings | \[<br>"frameborder=0"<br>\] |
+| appendTimestamp | If this option is set to `true` a timestamp is added to each URL that is embedded. This is to avoid caching issues. | Boolean | false |
 | title | Either a single String or a Array of String that will be added as title. It is supported to add html tags to the title! | String | null |
 | fontIcon | A single String or a Array of String containing the [Fontawesome 4.7](https://fontawesome.com/v4/icons/) or [Iconify](https://iconify.design/) class definition of icons (i.e. "fa fa-tint" or "fluent-emoji-flat:test-tube"). | Array or single String | null |
 | imgIcon | If you want to use a image as icon instead of [fontawesome 4.7](https://fontawesome.com/v4/icons/) icons you can specify a single URL or a Array of URLs with this option. **If both fontIcon and imgIcon are specified the imgIcon will be used!** | Array or single String | null |
@@ -205,6 +206,7 @@ Lets look at a bigger example:
     imgIcon: "./modules/MMM-EmbedURL/icons/tom.jpg",
     classes: "dummy3 myDummy",
     embedElementType: "webview",
+    appendTimestamp: true,
     embed: [
      "https://dummy:3000/humidity?orgId=2&from=1666840580521&to=1666862180521&panelId=4",
      "https://dummy:3000/humidity?orgId=2&from=1666840621970&to=1666862221970&panelId=2",
@@ -236,8 +238,9 @@ The following happens in this example:
   * Defines a image icon
   * Adds two dummy elements but not uses the default "iframe" element to embed but "webview" instead
   * All elements get the css classes "dummy3" and "myDummy" added
+  * All URLs get the current timestamp appended when added (i.e. `https://dummy:3000/humidity?orgId=2&from=1666840621970&to=1666862221970&panelId=2&timestamp=12345678`)
 
-If you think about the dummy URLs look a little bit like URLs of Grafana panels you are right. I use the module to show my Grafana charts. Examples of howto setup InfluxDB and Grafana are included in the [doc](doc) directory!
+If you think about the dummy URLs look a little bit like URLs of Grafana panels you are right. I use the module to show my Grafana charts. Examples of how to setup InfluxDB and Grafana are included in the [doc](doc) directory!
 
 ## Styling
 
