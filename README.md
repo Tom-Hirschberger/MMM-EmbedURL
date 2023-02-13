@@ -259,4 +259,12 @@ The size of the embeded elements is controlled in example with:
 }
 ```
 
+If you want to display i.e. a color inverterted version of the page you can add the following to your "custom.css":
+
+```css
+.MMM-EmbedURL .embed .embeded {
+    filter: invert(100%);
+}
+```
+
 I included a example of viewing a [webcam](doc/screenshots/webcam.png) showing how to embed it and move the position to hide the menu and footer. Look at the corresponding [config](doc/configs/webcam-config.js) and [css](doc/configs/webcam-custom.css) for more details.
