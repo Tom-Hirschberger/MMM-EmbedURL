@@ -1,7 +1,7 @@
 {
   "name": "MMM-EmbedURL",
   "version": "0.0.5",
-  "description": "",
+  "description": "A module for MagicMirror² which embeds other html elements like websites or images.",
   "main": "MMM-EmbedURL",
   "dependencies": {
     "@iconify/iconify": "latest"
@@ -11,6 +11,15 @@
     "type": "git",
     "url": "git@github.com:Tom-Hirschberger/MMM-EmbedURL.git"
   },
+  "keywords": [
+    "MagicMirror",
+    "MM",
+    "Embed",
+    "Iframe",
+    "Webview",
+    "mjpeg",
+    "videostream"
+  ],
   "author": "Thomas Hirschberger",
   "license": "MIT",
   "bugs": {

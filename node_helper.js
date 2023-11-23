@@ -1,4 +1,4 @@
-/* Magic Mirror²
+/* MagicMirror²
  * Module: EmbedURL
  *
  * By Tom Hirschberger
