@@ -1,6 +1,6 @@
 {
   "name": "MMM-EmbedURL",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A module for MagicMirror² which embeds other html elements like websites or images.",
   "main": "MMM-EmbedURL",
   "dependencies": {
