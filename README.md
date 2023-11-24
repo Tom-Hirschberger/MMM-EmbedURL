@@ -157,6 +157,7 @@ If the site uses a cookie banner you want to hide you may look at the [I-Dont-Ca
 | fontIcon | A single String or a Array of String containing the [Fontawesome 4.7](https://fontawesome.com/v4/icons/) or [Iconify](https://iconify.design/) class definition of icons (i.e. "fa fa-tint" or "fluent-emoji-flat:test-tube"). | Array or single String | null |
 | imgIcon | If you want to use a image as icon instead of [fontawesome 4.7](https://fontawesome.com/v4/icons/) icons you can specify a single URL or a Array of URLs with this option. **If both fontIcon and imgIcon are specified the imgIcon will be used!** | Array or single String | null |
 | classes | A String containing html classes that should be added to the wrappers. If you use multiple instances of the module you can style them differently this way. | String | null |
+| imgDecodeCheckInterval | If a value higher than 0 is set the module checks the content of all "img" embed elements to be decodeable. If the content is not decodeable the URL gets reset. | Integer | -1 |
 | embed | Either a single URL as String or a Array containing Strings and/or more embed objects (see next section for more information). | Array or single String | null |
 
 ## The embed array
@@ -165,7 +166,7 @@ The module supports multiple ways to specify the websites you want to integrate.
 
 Additionally the "profile" option can be used to set a space separated String of profiles in which this elements should be displayed.
 
-**If no positions or attributes are defined in the embed array but in the main configuration the ones in the main configuration will be used!**
+**If no positions, attributes or imgDecodeCheckInterval values are defined in the embed array but in the main configuration the ones in the main configuration will be used!**
 
 Lets look at a bigger example:
 
@@ -256,6 +257,14 @@ The size of the embeded elements is controlled in example with:
 .MMM-EmbedURL .embed .embeded {
     width: 800px;
     height: 400px;
+}
+```
+
+If you want to display i.e. a color inverterted version of the page you can add the following to your "custom.css":
+
+```css
+.MMM-EmbedURL .embed .embeded {
+    filter: invert(100%);
 }
 ```
 

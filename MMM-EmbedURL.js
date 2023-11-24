@@ -1,6 +1,6 @@
 /* global Module
 
-/* Magic Mirror²
+/* MagicMirror²
  * Module: EmbedURL
  *
  * By Tom Hirschberger
@@ -16,7 +16,8 @@ Module.register('MMM-EmbedURL', {
 		positions: "tie",
 		attributes: [
 			"frameborder=0"
-		]
+		],
+		imgDecodeCheckInterval: -1
 	},
 
 	suspend: function () {
@@ -167,10 +168,14 @@ Module.register('MMM-EmbedURL', {
 		}
 	},
 
-	getEmbedElement: function(subConfig, additionalClasses, attributes, embedElementType, appendTimestamp){
+	getEmbedElement: function(subConfig, additionalClasses, attributes, embedElementType, appendTimestamp, imgDecodeCheckInterval){
 		const self = this
 		if(subConfig != null){
 			let embedElement = document.createElement(embedElementType)
+			if ((embedElementType === "img") && (imgDecodeCheckInterval > 0)){
+				self.imgs.push([embedElement,imgDecodeCheckInterval])
+			}
+
 			if ((typeof appendTimestamp !== "undefined") &&
 				appendTimestamp)
 			{
@@ -203,7 +208,7 @@ Module.register('MMM-EmbedURL', {
 		}
 	},
 
-	getWrapperElement: function(subConfig, fallbackPositions, fallbackAttributes, fallbackEmbedElementType, fallbackAppendTimestamp, depth=0){
+	getWrapperElement: function(subConfig, fallbackPositions, fallbackAttributes, fallbackEmbedElementType, fallbackAppendTimestamp, fallbackImgDecodeCheckInterval, depth=0){
 		if (subConfig != null){
 			const self = this
 
@@ -242,6 +247,13 @@ Module.register('MMM-EmbedURL', {
 				appendTimestamp = fallbackAppendTimestamp
 			}
 
+			let imgDecodeCheckInterval
+			if (typeof subConfig["imgDecodeCheckInterval"] !== "undefined"){
+				imgDecodeCheckInterval = subConfig["imgDecodeCheckInterval"] * 1000
+			} else {
+				imgDecodeCheckInterval = fallbackImgDecodeCheckInterval
+			}
+
 			let wrapper = document.createElement(self.config["basicElementType"])
 			wrapper.classList.add("embededWrapper")
 			wrapper.classList.add("embededWrapper"+depth)
@@ -266,16 +278,16 @@ Module.register('MMM-EmbedURL', {
 						let curEmbed = embedConfig[idx]
 						let curEmbedElement = null
 						if (typeof curEmbed === "string"){
-							curEmbedElement = self.getEmbedElement(curEmbed, classes, attributes, embedElementType, appendTimestamp)
+							curEmbedElement = self.getEmbedElement(curEmbed, classes, attributes, embedElementType, appendTimestamp, imgDecodeCheckInterval)
 						} else {
-							curEmbedElement = self.getWrapperElement(curEmbed || null, positions, attributes, embedElementType, appendTimestamp, depth+1)
+							curEmbedElement = self.getWrapperElement(curEmbed || null, positions, attributes, embedElementType, appendTimestamp, imgDecodeCheckInterval, depth+1)
 						}
 						if(curEmbedElement != null){
 							embedElement.appendChild(curEmbedElement)
 						}
 					}
 				} else {
-					embedElement = self.getEmbedElement(embedConfig, classes, attributes, embedElementType, appendTimestamp)
+					embedElement = self.getEmbedElement(embedConfig, classes, attributes, embedElementType, appendTimestamp, imgDecodeCheckInterval)
 				}
 			}
 			
@@ -321,7 +333,14 @@ Module.register('MMM-EmbedURL', {
 	getDom: function () {
 		const self = this
 
-		let wrapper = self.getWrapperElement(self.config, self.config.positions, self.config.attributes, self.config.embedElementType, 0)
+		for (let imgIdx = 0; imgIdx < self.imgsTimeouts.length; imgIdx++){
+			clearTimeout(self.imgsTimeouts[imgIdx])
+		}
+	
+		self.imgsTimeouts = []
+		self.imgs = []
+
+		let wrapper = self.getWrapperElement(self.config, self.config.positions, self.config.attributes, self.config.embedElementType, self.config.imgDecodeCheckInterval * 1000, 0)
 
 		if (wrapper == null){
 			wrapper = document.createElement(self.config["basicElementType"])
@@ -329,13 +348,37 @@ Module.register('MMM-EmbedURL', {
 
 		wrapper.classList.add("embed")
 		wrapper.classList.add("rootWrapper")
+
+		for (let imgIdx = 0; imgIdx < self.imgs.length; imgIdx++){
+			self.checkImgSrc(imgIdx)
+		}
 		
 		return wrapper
+	},
+
+	checkImgSrc: async function (imgIdx) {
+		const self = this
+		let imgElement = self.imgs[imgIdx][0]
+		try {
+			await imgElement.decode();
+		} catch {
+			console.log("Image with idx: "+imgIdx+" has an undecodeable URL. Refreshing it!")
+			let src = imgElement.src;
+			imgElement.src = "";
+			imgElement.src = src;
+		}
+
+		self.imgsTimeouts[imgIdx] = setTimeout(() => {
+			self.checkImgSrc(imgIdx)
+		}, self.imgs[imgIdx][1])
 	},
 
 	start: function () {
 		const self = this
 		self.currentProfile = null
+
+		self.imgs = []
+		self.imgsTimeouts = []
 
 		let curClasses = []
 		let classConfig = self.config["classes"] || null
