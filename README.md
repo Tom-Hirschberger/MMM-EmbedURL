@@ -177,6 +177,7 @@ Lets look at a bigger example:
  header: "Embed-URL",
  config: {
   updateInterval: 30,
+  classes: "extraClassOne extraClassTwo",
   embed: [
    "https://magicmirror.builders/",
    {
@@ -225,6 +226,7 @@ The following happens in this example:
 * The module is only visible if profile "pageC", "pageL1", "pageR1" or "pageR2" is active
 * The MagicMirror² page will be added in a iframe
 * Three embed objects are created
+* Each element and all wrappers get the extra classes "extraClassOne" and "extraClassTwo" added
 * The first object:
   * Defines a single title ("Dummy1") and is only visible if profile "pageR1" or "pageL1" is active
   * Defines other attributes than the default ones
