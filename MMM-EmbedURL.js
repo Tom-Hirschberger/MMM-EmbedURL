@@ -189,14 +189,17 @@ Module.register('MMM-EmbedURL', {
 			if(attributes != null){
 				// console.log(JSON.stringify(attributes))
 				for(let curAttribute of attributes){
-					let attArray = curAttribute.split("=")
-					let key = attArray[0]
-					let value = ""
-					if(typeof attArray[1] !== "undefined"){
-						value = attArray[1]
+					if (curAttribute.indexOf("=") > 0){
+						let attArray = curAttribute.split("=")
+						let key = attArray[0]
+						let value = ""
+						if(typeof attArray[1] !== "undefined"){
+							value = attArray[1]
+						}
+						embedElement.setAttribute(key.trim(), value.trim())
+					} else {
+						embedElement.setAttribute(curAttribute.trim(),"")
 					}
-
-					embedElement.setAttribute(key.trim(), value.trim())
 				}
 			}
 			embedElement.classList.add("embeded")
