@@ -4,7 +4,6 @@ This is a MagicMirror² module which embeds other websites either by "iframe" (d
 Multiple pages can be embeded at once and the pages can be refreshed periodically (all websites get refreshed at the same time).
 As "webview" usage is possible (only if electron browser is used) even pages that forbid embedding by "iframe" can be embedded (i.e. NodeRed Dashboard).
 
-
 I use it to embed my Grafana panels, my NodeRED-Dashboard and a Webpage with a Live-Webcam to my mirror.
 
 <p align="center">
@@ -23,7 +22,7 @@ I use it to embed my Grafana panels, my NodeRED-Dashboard and a Webpage with a L
 
 ```bash
 cd ~/MagicMirror/modules
-git clone https://github.com/Tom-Hirschberger/MMM-EmbedURL.git
+git clone https://github.com/Tom-Hirschberger/MMM-EmbedURL
 cd MMM-EmbedURL
 npm install
 ```
@@ -32,7 +31,7 @@ npm install
 
 Add the following code to your ~/MagicMirror/config/config.js:
 
-```json5
+```js
 {
   module: "MMM-EmbedURL",
   position: "top_center",
@@ -76,7 +75,7 @@ If do use the build in electron browser to view the mirror you can use [Webview]
 
 You can do that by adding:
 
-```json5
+```js
   electronOptions: {
     webPreferences: {
       webviewTag: true,
@@ -88,11 +87,8 @@ to your general configuration in your "config.js" file.
 
 The start of the file then will look something like:
 
-```json5
+```js
 /* MagicMirror² Config Sample
- *
- * By Michael Teeuw https://michaelteeuw.nl
- * MIT Licensed.
  *
  * For more information on how you can configure this file
  * see https://docs.magicmirror.builders/configuration/introduction.html
@@ -113,11 +109,8 @@ You then need to set the "embedElementType" to "webview" in the module configura
 
 **As of MagicMirror² version 2.22.0 you can use Iframe to embed the site and set the two config options:**
 
-```json5
+```js
 /* MagicMirror² Config Sample
- *
- * By Michael Teeuw https://michaelteeuw.nl
- * MIT Licensed.
  *
  * For more information on how you can configure this file
  * see https://docs.magicmirror.builders/configuration/introduction.html
@@ -170,7 +163,7 @@ Additionally the "profile" option can be used to set a space separated String of
 
 Lets look at a bigger example:
 
-```json5
+```js
 {
  module: "MMM-EmbedURL",
  position: "top_center",
@@ -271,3 +264,9 @@ If you want to display i.e. a color inverterted version of the page you can add 
 ```
 
 I included a example of viewing a [webcam](doc/screenshots/webcam.png) showing how to embed it and move the position to hide the menu and footer. Look at the corresponding [config](doc/configs/webcam-config.js) and [css](doc/configs/webcam-custom.css) for more details.
+
+## Developer commands
+
+* `npm install` - Install devDependencies like ESLint.
+* `npm run lint` - Run linting and formatter checks.
+* `npm run lint:fix` - Fix linting and formatter issues.
