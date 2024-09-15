@@ -1,24 +1,25 @@
 /* MagicMirror²
- * Module: EmbedURL
+ * Module: MMM-EmbedURL
  *
  * By Tom Hirschberger
  * MIT Licensed.
  */
-const NodeHelper = require('node_helper')
+const Log = require("logger")
+const NodeHelper = require("node_helper")
 
 module.exports = NodeHelper.create({
 
-	start: function () {
+	start() {
 		this.started = false
 	},
 
-	socketNotificationReceived: function (notification, payload) {
+	socketNotificationReceived(notification, payload) {
 		const self = this
-		if (notification === 'CONFIG' && self.started === false) {
+		if (notification === "CONFIG" && self.started === false) {
 			self.config = payload
 			self.started = true
 		} else {
-			console.log(this.name + ': Received Notification: ' + notification)
+			Log.log(`${this.name}: Received Notification: ${notification}`)
 		}
 	}
 })
