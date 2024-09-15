@@ -1,15 +1,20 @@
 {
-  "name": "MMM-EmbedURL",
-  "version": "0.0.6",
+  "name": "mmm-embedurl",
+  "version": "0.0.7",
   "description": "A module for MagicMirror² which embeds other html elements like websites or images.",
   "main": "MMM-EmbedURL",
   "dependencies": {
     "@iconify/iconify": "latest"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "@eslint/js": "^9.10.0",
+    "@stylistic/eslint-plugin": "^2.8.0",
+    "eslint": "^9.10.0",
+    "globals": "^15.9.0"
+  },
   "repository": {
     "type": "git",
-    "url": "git@github.com:Tom-Hirschberger/MMM-EmbedURL.git"
+    "url": "git+https://github.com/Tom-Hirschberger/MMM-EmbedURL.git"
   },
   "keywords": [
     "MagicMirror",
@@ -25,5 +30,10 @@
   "bugs": {
     "url": "https://github.com/Tom-Hirschberger/MMM-EmbedURL/issues"
   },
-  "homepage": "https://github.com/Tom-Hirschberger/MMM-EmbedURL/#readme"
+  "homepage": "https://github.com/Tom-Hirschberger/MMM-EmbedURL/#readme",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "test": "npm run lint"
+  }
 }
