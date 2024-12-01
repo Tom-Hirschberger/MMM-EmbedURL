@@ -5,10 +5,7 @@ Multiple pages can be embeded at once and the pages can be refreshed periodicall
 As "webview" usage is possible (only if electron browser is used) even pages that forbid embedding by "iframe" can be embedded (i.e. NodeRed Dashboard).
 
 I use it to embed my Grafana panels, my NodeRED-Dashboard and a Webpage with a Live-Webcam to my mirror.
-
-<p align="center">
- <img src="doc/screenshots/SomeGrafanaPanels.png" alt="Screen showing some Grafana panels" width="600px"/>
-</p>
+<img src="doc/screenshots/SomeGrafanaPanels.png" alt="Screen showing some Grafana panels">
 
 ## Basic features
 
@@ -29,7 +26,7 @@ npm install
 
 ## Basic configuration
 
-Add the following code to your ~/MagicMirror/config/config.js:
+Add the following code to your \~/MagicMirror/config/config.js:
 
 ```js
 {
@@ -51,7 +48,7 @@ Add the following code to your ~/MagicMirror/config/config.js:
 
 In this a very basic example with the following result:
 
-* The module will be included at the "top_center" position
+* The module will be included at the "top\_center" position
 * The header text of the module is "Embed-URL"
 * All embeded pages will be refreshed every 120 seconds
 * All embeded pages will get the attribute "frameborder=0" set
@@ -62,7 +59,7 @@ In this a very basic example with the following result:
 If the site(s) you want to embed forbid the embedding by setting some headers there are multiple ways them embed them anyway.
 
 **PLEASE RESPECT THE CONTENT POLICY OF THE PAGES YOU ARE EMBEDDING!**
-  
+
 As most of the pages forbid embeding only to avoid Cross-Site-Scripting attacks and these are very unlikly at the mirror i will show some ways the embed pages that forbid embedding anyway.
 
 There are extensions for at least Firefox, Chrome and Chromium to remove Cookie banners as well.
@@ -137,14 +134,15 @@ If the site uses a cookie banner you want to hide you may look at the [I-Dont-Ca
 
 :warning: The default "basicElementType" changed with version 0.0.4 from "span" to "div" cause webview does not work with "span" properly.
 
-| Option  | Description | Type | Default |
-| ------- | --- | --- | --- |
+| Option | Description | Type | Default |
+| ------ | ----------- | ---- | ------- |
 | updateInterval | The websites will be refreshed in this interval provided in seconds. Set the value to 0 or lower to disable automatic refresh. | Integer | 60 |
+| updateDomOnResume | The module updates all embeded elements if it gets resumed in the default configuration. If you do not want this behavior but wait for the `updateInterval` instead set this option to `false` | Boolean | true |
 | animationSpeed | The creation of the elements will be animated with this speed in milliseconds. | Integer | 500 |
 | embedElementType | The websites will be embeded with this html element. | String | "iframe" |
 | basicElementType | The wrappers use this type of html element. | String | "div" |
 | positions | The elements will be added in the order of the characters in this string (i=icon, t=title, e=embeded). | String | "tie" |
-| attributes | This is a array with additional attributes that should be added to the embeded html element. | Array of Strings | \[<br>"frameborder=0"<br>\] |
+| attributes | This is a array with additional attributes that should be added to the embeded html element. | Array of Strings | [<br>"frameborder=0"<br>] |
 | appendTimestamp | If this option is set to `true` a timestamp is added to each URL that is embedded. This is to avoid caching issues. | Boolean | false |
 | title | Either a single String or a Array of String that will be added as title. It is supported to add html tags to the title! | String | null |
 | fontIcon | A single String or a Array of String containing the [Fontawesome 4.7](https://fontawesome.com/v4/icons/) or [Iconify](https://iconify.design/) class definition of icons (i.e. "fa fa-tint" or "fluent-emoji-flat:test-tube"). | Array or single String | null |
@@ -205,7 +203,7 @@ Lets look at a bigger example:
     embed: [
      "https://dummy:3000/humidity?orgId=2&from=1666840580521&to=1666862180521&panelId=4",
      "https://dummy:3000/humidity?orgId=2&from=1666840621970&to=1666862221970&panelId=2",
-     
+
     ]
    },
   ]
@@ -221,20 +219,20 @@ The following happens in this example:
 * Three embed objects are created
 * Each element and all wrappers get the extra classes "extraClassOne" and "extraClassTwo" added
 * The first object:
-  * Defines a single title ("Dummy1") and is only visible if profile "pageR1" or "pageL1" is active
-  * Defines other attributes than the default ones
-  * Addes two elements: A video of youtube and a dummy
+    * Defines a single title ("Dummy1") and is only visible if profile "pageR1" or "pageL1" is active
+    * Defines other attributes than the default ones
+    * Addes two elements: A video of youtube and a dummy
 * The second object:
-  * Defines two titles "Dummy2" and "Dummy2-2" and is only visible if profile "pageR2" is active
-  * Defines a fontIcon
-  * Addes three dummy elements
-  * The icon should be added first, after it th title followed by the embeded websites
+    * Defines two titles "Dummy2" and "Dummy2-2" and is only visible if profile "pageR2" is active
+    * Defines a fontIcon
+    * Addes three dummy elements
+    * The icon should be added first, after it th title followed by the embeded websites
 * The third object
-  * Is visible at all profiles
-  * Defines a image icon
-  * Adds two dummy elements but not uses the default "iframe" element to embed but "webview" instead
-  * All elements get the css classes "dummy3" and "myDummy" added
-  * All URLs get the current timestamp appended when added (i.e. `https://dummy:3000/humidity?orgId=2&from=1666840621970&to=1666862221970&panelId=2&timestamp=12345678`)
+    * Is visible at all profiles
+    * Defines a image icon
+    * Adds two dummy elements but not uses the default "iframe" element to embed but "webview" instead
+    * All elements get the css classes "dummy3" and "myDummy" added
+    * All URLs get the current timestamp appended when added (i.e. `https://dummy:3000/humidity?orgId=2&from=1666840621970&to=1666862221970&panelId=2&timestamp=12345678`)
 
 If you think about the dummy URLs look a little bit like URLs of Grafana panels you are right. I use the module to show my Grafana charts. Examples of how to setup InfluxDB and Grafana are included in the [doc](doc) directory!
 
@@ -267,6 +265,6 @@ I included a example of viewing a [webcam](doc/screenshots/webcam.png) showing h
 
 ## Developer commands
 
-* `npm install` - Install devDependencies like ESLint.
-* `npm run lint` - Run linting and formatter checks.
-* `npm run lint:fix` - Fix linting and formatter issues.
+* `npm install` \- Install devDependencies like ESLint\.
+* `npm run lint` \- Run linting and formatter checks\.
+* `npm run lint:fix` \- Fix linting and formatter issues\.
