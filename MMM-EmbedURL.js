@@ -15,17 +15,18 @@ Module.register("MMM-EmbedURL", {
 		attributes: [
 			"frameborder=0"
 		],
-		imgDecodeCheckInterval: -1
+		imgDecodeCheckInterval: -1,
+		updateDomOnResume: true
 	},
 
 	suspend() {
 		const self = this
-		self.resetTimer(-1)
+		self.resetTimer(-1, false)
 	},
 
 	resume() {
 		const self = this
-		self.resetTimer(self.config.updateInterval)
+		self.resetTimer(self.config.updateInterval, self.config.updateDomOnResume)
 	},
 
 	getScripts() {
@@ -328,6 +329,7 @@ Module.register("MMM-EmbedURL", {
 
 	getDom() {
 		const self = this
+		console.log(self.name+": UPDATE DOM")
 
 		for (let imgIdx = 0; imgIdx < self.imgsTimeouts.length; imgIdx++) {
 			clearTimeout(self.imgsTimeouts[imgIdx])
@@ -387,10 +389,10 @@ Module.register("MMM-EmbedURL", {
 
 		self.sendSocketNotification("CONFIG", self.config)
 
-		self.resetTimer(self.config.updateInterval)
+		self.resetTimer(self.config.updateInterval, true)
 	},
 
-	resetTimer(interval) {
+	resetTimer(interval, updateDom) {
 		const self = this
 		if (self.refreshTimer) {
 			clearTimeout(self.refreshTimer)
@@ -399,10 +401,10 @@ Module.register("MMM-EmbedURL", {
 
 		if (interval > 0) {
 			self.refreshTimer = setTimeout(() => {
-				self.resetTimer(interval)
+				self.resetTimer(interval, true)
 			}, interval * 1000)
 
-			if (!self.hidden) {
+			if ((!self.hidden) && updateDom) {
 				self.updateDom(self.config.animationSpeed)
 			}
 		}
