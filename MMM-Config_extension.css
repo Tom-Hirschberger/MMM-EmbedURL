@@ -1,3 +1,7 @@
-/*.embed:nth-of-type(odd) {
+/*.embed:nth-of-type(odd) { >ul >li:nth-of-type(odd)
 	background-color: green;	
 }*/
+
+.m_MMM-EmbedURL div #jsonform-1-elt-MMM-EmbedURL\.config\.embed >ul >li:nth-of-type(odd) {
+		background-color: #d2e0d2;
+}
