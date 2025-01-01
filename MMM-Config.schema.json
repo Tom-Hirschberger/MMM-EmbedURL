@@ -1,0 +1,450 @@
+{
+  "schema": {
+    "MMM-EmbedURL": {
+      "type": "object",
+      "title": "properties for MMM-EmbedURL",
+      "properties": {
+        "module": {
+          "type": "string",
+          "title": "module",
+          "default": "MMM-EmbedURL",
+          "readonly": true
+        },
+        "disabled": {
+          "type": "boolean",
+          "title": "disabled",
+          "default": false
+        },
+        "position": {
+          "type": "string",
+          "title": "module position",
+          "readonly": "true"
+        },
+        "animateIn": {
+          "type": "string"
+        },
+        "animateOut": {
+          "type": "string"
+        },
+        "classes": {
+          "type": "string",
+          "title": "classes",
+          "default": ""
+        },
+        "order": {
+          "type": "string",
+          "title": "order",
+          "default": "*"
+        },
+        "inconfig": {
+          "type": "string",
+          "title": "inconfig",
+          "default": "0"
+        },
+        "index": {
+          "type": "integer"
+        },
+        "config": {
+          "type": "object",
+          "title": "config",
+          "properties": {
+            "basicElementType": {
+              "type": "string",
+              "enum":[
+                "div","span"]
+            },
+            "embedElementType": {
+              "type": "string",
+              "enum":[
+                "iframe","embed"]
+            },
+            "updateInterval": {
+              "type": "integer",
+              "default":60
+            },
+            "animationSpeed": {
+              "type": "integer",
+              "default":500
+            },
+            "positions": {
+              "type": "string"
+            },
+            "appendTimestamp": {
+              "type": "boolean",
+              "default": false
+            },
+            "title": {
+              "type": "string"
+            },
+            "fontIcon": {
+              "type": "string"
+            },
+            "imgIcon": {
+              "type": "string"
+            },
+            "attributes": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "embed": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "urls": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "basicElementType": {
+                    "type": "string",
+                    "enum": [
+                      "div",
+                      "span"
+                    ]
+                  },
+                  "embedElementType": {
+                    "type": "string",
+                    "enum": [
+                      "iframe",
+                      "webview"
+                    ]
+                  },
+                  "updateInterval": {
+                    "type": "integer",
+                    "default":60
+                  },
+                  "animationSpeed": {
+                    "type": "integer",
+                    "default":500
+                  },
+                  "positions": {
+                    "type": "string"
+                  },
+                  "fontIcon": {
+                    "type": "string"
+                  },
+                  "imgIcon": {
+                    "type": "string"
+                  },
+                  "appendTimestamp": {
+                    "type": "boolean",
+                    "default": false
+                  },
+                  "title": {
+                    "type": "string"
+                  },
+                  "profiles": {
+                    "type": "string"
+                  },
+                  "attributes": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "embed": {
+                    "type": "array",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "urls": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "basicElementType": {
+                          "type": "string",
+                          "enum":[
+                            "div","span"]
+                        },
+                        "embedElementType": {
+                          "type": "string",
+                          "enum":[
+                            "iframe","embed"]
+                        },
+                        "updateInterval": {
+                          "type": "integer"
+                        },
+                        "animationSpeed": {
+                          "type": "integer"
+                        },
+                        "positions": {
+                          "type": "string"
+                        },
+                        "attributes": {
+                          "type": "array",
+                          "items": {
+                            "type": "string"
+                          }
+                        },
+                        "embed": {
+                           "type": "array",
+                          "items": {
+                          "type": "object",
+                            "properties": {
+                              "urls": {
+                                "type": "array",
+                                "items": {
+                                  "type": "string"
+                                }
+                              }
+                            }
+                          }
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "imgDecodeCheckInterval": {
+              "type": "integer",
+              "default":0,
+              "minimum":-1
+            },
+            "updateDomOnResume": {
+              "type": "boolean",
+              "default":false
+            }
+          }
+        }
+      }
+    }
+  },
+  "form": [
+    {
+      "key": "MMM-EmbedURL.disabled",
+      "htmlClass": "disabled_checkbox",
+      "description": "when checked the module will not be used by MagicMirror<br> but will remain in config.js if already present"
+    },
+    {
+      "key": "MMM-EmbedURL.position",
+      "description": "use Module Positions section below to set or change"
+    },
+    {
+      "key": "MMM-EmbedURL.classes",
+      "description": "css classes to use for this module, beyond what MM provides"
+    },
+    {
+      "key": "MMM-EmbedURL.order",
+      "type": "hidden"
+    },
+    {
+      "key": "MMM-EmbedURL.inconfig",
+      "type": "hidden"
+    },
+    {
+      "key": "MMM-EmbedURL.index",
+      "type": "hidden"
+    },
+    {
+      "type": "fieldset",
+      "title": "config",
+      "items": [
+        {
+          "title": "basicElementType",
+          "key": "MMM-EmbedURL.config.basicElementType",
+          "description":"select which type of html element to use for the content"
+        },
+        {
+          "title": "embedElementType",
+          "key": "MMM-EmbedURL.config.embedElementType",
+          "description":"choose how to embed the content,<br> note:if you choose embed, you must also set the electronOptions to enable enbedded components"
+        },
+        {
+          "title": "updateInterval",
+          "key": "MMM-EmbedURL.config.updateInterval",
+          "description":"The websites will be refreshed in this interval provided in seconds.<br> Set the value to 0 or lower to disable automatic refresh."
+        },
+        {
+          "title": "animationSpeed",
+          "key": "MMM-EmbedURL.config.animationSpeed",
+          "description":"The creation of the elements will be animated with this speed in milliseconds."
+        },
+        {
+          "title": "positions",
+          "key": "MMM-EmbedURL.config.positions",
+          "description":"The elements will be added in the order of the characters in this string (i=icon, t=title, e=embeded)."
+        },
+        {
+          "title": "appendTimestamp",
+          "key": "MMM-EmbedURL.config.appendTimestamp",
+          "description":"If this option is set to true a timestamp is added to each URL that is embedded. This is to avoid caching issues."
+        },
+        {
+          "title": "title",
+          "key": "MMM-EmbedURL.config.title",
+          "description":"Either a single String or a Array of String that will be added as title. It is supported to add html tags to the title"
+        },
+        {
+          "title": "fontIcon",
+          "key": "MMM-EmbedURL.config.fontIcon",
+          "description":"A single String or a Array of String containing the Fontawesome 4.7 or Iconify class definition of icons (i.e. \"fa fa-tint\" or \"fluent-emoji-flat:test-tube\").  Array or single String"
+        },
+        {
+          "title": "imgIcon",
+          "key": "MMM-EmbedURL.config.imgIcon",
+          "description":"If you want to use a image as icon instead of fontawesome 4.7 icons you can specify a single URL or a Array of URLs with this option. <br>If both fontIcon and imgIcon are specified the imgIcon will be used!"
+        },
+        {
+          "type": "array",
+          "title": "attributes",
+          "deleteCurrent": false,
+          "draggable": false,
+          "description":"This is a array with additional attributes that should be added to the embeded html element.",
+          "items": [
+            {
+              "title": "attribute {{idx}}",
+              "key": "MMM-EmbedURL.config.attributes[]"
+            }
+          ]
+        },
+        {
+          "title": "embed",
+          "key": "MMM-EmbedURL.config.embed",
+          "type":"array",
+          "draggable": false,
+          "items" :[
+            {
+              "type": "fieldset",
+              "title": "embed {{idx}}",
+              "htmlClass":"embed",
+              "expandable": true,
+              "items": [
+                {
+                    "type":"array",
+                    "draggable": false,
+                    "title":"urls",
+                    "items":[
+                      {
+                     "title": " ",
+                     "key": "MMM-EmbedURL.config.embed[].urls[]"
+                      }
+                     ]
+                },
+                {
+                  "title": "basicElementType ",
+                  "key": "MMM-EmbedURL.config.embed[].basicElementType",
+                  "description":"select which type of html element to use for the content"
+                },
+                {
+                  "title": "embedElementType ",
+                  "key": "MMM-EmbedURL.config.embed[].embedElementType",
+                  "description":"choose how to embed the content,<br> note:if you choose embed, you must also set the electronOptions to enable enbedded components"
+                },
+                {
+                  "title": "updateInterval ",
+                  "key": "MMM-EmbedURL.config.embed[].updateInterval",
+                  "description":"The websites will be refreshed in this interval provided in seconds.<br> Set the value to 0 or lower to disable automatic refresh."
+                },
+                {
+                  "title": "animationSpeed ",
+                  "key": "MMM-EmbedURL.config.embed[].animationSpeed",
+                  "description":"The creation of the elements will be animated with this speed in milliseconds."
+                },
+                {
+                  "title": "positions ",
+                  "key": "MMM-EmbedURL.config.embed[].positions",
+                  "description":"The elements will be added in the order of the characters in this string (i=icon, t=title, e=embeded)."
+                },
+                {
+                  "title": "appendTimestamp",
+                  "key": "MMM-EmbedURL.config.embed[].appendTimestamp",
+                  "description":"If this option is set to true a timestamp is added to each URL that is embedded. This is to avoid caching issues."
+                },
+                {
+                  "title": "title",
+                  "key": "MMM-EmbedURL.config.embed[].title",
+                  "description":"Either a single String or a Array of String that will be added as title. It is supported to add html tags to the title"
+                },
+                {
+                  "title": "fontIcon",
+                  "key": "MMM-EmbedURL.config.embed[].fontIcon",
+                  "description":"A single String or a Array of String containing the Fontawesome 4.7 or Iconify class definition of icons (i.e. \"fa fa-tint\" or \"fluent-emoji-flat:test-tube\").  Array or single String"
+                },
+                {
+                  "title": "imgIcon",
+                  "key": "MMM-EmbedURL.config.embed[].imgIcon",
+                  "description":"If you want to use a image as icon instead of fontawesome 4.7 icons you can specify a single URL or a Array of URLs with this option. <br>If both fontIcon and imgIcon are specified the imgIcon will be used!"
+                },
+                {
+                  "type":"array",
+                  "title":"attributes",
+                  "draggable": false,
+                  "description":"This is a array with additional attributes that should be added to the embeded html element.",
+                  "items":[
+                    {
+                    "title": "attribute {{idx}}",
+                    "key": "MMM-EmbedURL.config.embed[].attributes[]"
+                    }
+                  ]
+                },
+                {
+                  "title": "embed",
+                  "key": "MMM-EmbedURL.config.embed[].embed",
+                  "type":"array",
+                  "draggable": false,
+                  "items" :[
+                    {
+                      "type": "fieldset",
+                      "title": "embed {{idx}}",
+                      "expandable": true,
+                      "items": [
+                        {
+                        "type":"array",
+                        "draggable": false,
+                        "title":"urls",
+                        "items":[
+                          {
+                         "title": " ",
+                         "key": "MMM-EmbedURL.config.embed[].embed[].urls[]"
+                          }
+                        ]
+                      }
+                     ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "title": "imgDecodeCheckInterval",
+          "key": "MMM-EmbedURL.config.imgDecodeCheckInterval",
+          "description":"If a value higher than 0 is set the module checks the content of all \"img\" embed elements to be decodeable. If the content is not decodeable the URL gets reset."
+        },
+        {
+          "title": "updateDomOnResume",
+          "key": "MMM-EmbedURL.config.updateDomOnResume",
+          "description":"The module updates all embeded elements if it gets resumed in the default configuration. If you do not want this behavior but wait for the updateInterval instead set this option to false"
+        }
+      ]
+    }
+  ],
+  "value": {
+    "disabled": true,
+    "module": "MMM-EmbedURL",
+    "position": "none",
+    "order": "*",
+    "inconfig": "0",
+    "config": {
+      "basicElementType": "div",
+      "embedElementType": "iframe",
+      "updateInterval": 60,
+      "animationSpeed": 500,
+      "positions": "tie",
+      "attributes": [
+        "frameborder=0"
+      ],
+      "embed": "",
+      "imgDecodeCheckInterval": -1,
+      "updateDomOnResume": true
+    }
+  }
+}
