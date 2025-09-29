@@ -12,14 +12,16 @@ function converter(config_data, direction){
 	   if(typeof nc.embed === 'string'){
 	   	 if(debug)
 	   	 	console.log(" MMM-EmbedURL converter encountered 1, embed:string")
-	   	 nc.embed= [ {urls:nc}]
+	   	 nc.embed= [ {urls:[nc.embed]}]
 	   	 //embed_list=em
 	   } else {
 	   	for(let i in nc.embed){
 	   		let x = nc.embed[i]
-	   		if (typeof x === 'string')
-	   			nc.embed[i]= {urls:[x]}
-	   		else{
+	   		if (typeof x === 'string') {
+				if(debug)
+	   				console.log("element is a string")
+				nc.embed[i]= {urls:[x]}
+			} else {
 	   			if(debug)
 	   				console.log("element in array="+JSON.stringify(x,null,2))
 	   			x.embed = [{urls:x.embed}]
@@ -52,7 +54,7 @@ function converter(config_data, direction){
 					nc.embed=e.urls[0]
 				} else {
 					// just a list of urls
-					e.urls.forEach(u =>{
+					e.urls.forEach(u => {
 						nc.embed.push(u)
 					})
 				}
