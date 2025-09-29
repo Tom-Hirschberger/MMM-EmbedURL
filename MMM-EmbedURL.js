@@ -16,7 +16,8 @@ Module.register("MMM-EmbedURL", {
 			"frameborder=0"
 		],
 		imgDecodeCheckInterval: -1,
-		updateDomOnResume: true
+		updateDomOnResume: true,
+		embed: ""
 	},
 
 	suspend() {
