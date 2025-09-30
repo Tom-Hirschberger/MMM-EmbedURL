@@ -56,7 +56,7 @@
             "embedElementType": {
               "type": "string",
               "enum":[
-                "iframe","embed"]
+                "iframe","webview"]
             },
             "updateInterval": {
               "type": "integer",
