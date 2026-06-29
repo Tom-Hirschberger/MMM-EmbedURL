@@ -388,8 +388,6 @@ Module.register("MMM-EmbedURL", {
 
 		self.classes = curClasses
 
-		self.sendSocketNotification("CONFIG", self.config)
-
 		self.resetTimer(self.config.updateInterval, true)
 	},
 
